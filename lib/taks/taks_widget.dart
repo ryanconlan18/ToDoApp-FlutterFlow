@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/add_task_widget.dart';
 import '/components/task_widget.dart';
@@ -7,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'taks_model.dart';
 export 'taks_model.dart';
 
@@ -40,6 +42,8 @@ class _TaksWidgetState extends State<TaksWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -202,6 +206,41 @@ class _TaksWidgetState extends State<TaksWidget> {
                         },
                       );
                     },
+                  ),
+                ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    _model.apiResultb7g = await ZenQuotesAPICall.call();
+
+                    if ((_model.apiResultb7g?.succeeded ?? true)) {
+                      FFAppState().quoteText = FFAppState().quoteText;
+                      safeSetState(() {});
+                    }
+
+                    safeSetState(() {});
+                  },
+                  child: Text(
+                    FFAppState().quoteText,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: GoogleFonts.inter(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
                   ),
                 ),
               ].divide(SizedBox(height: 12.0)),

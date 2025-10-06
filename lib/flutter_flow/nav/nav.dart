@@ -91,11 +91,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: TaksWidget.routeName,
-          path: TaksWidget.routePath,
-          builder: (context, params) => TaksWidget(),
-        ),
-        FFRoute(
           name: OnboardingWidget.routeName,
           path: OnboardingWidget.routePath,
           builder: (context, params) => OnboardingWidget(),
@@ -117,6 +112,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: CompletedWidget.routeName,
           path: CompletedWidget.routePath,
           builder: (context, params) => CompletedWidget(),
+        ),
+        FFRoute(
+          name: TaksWidget.routeName,
+          path: TaksWidget.routePath,
+          builder: (context, params) => TaksWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
